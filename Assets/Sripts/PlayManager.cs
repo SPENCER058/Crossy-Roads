@@ -19,7 +19,7 @@ public class PlayManager : MonoBehaviour
 
 	public UnityEvent<int,int> OnUpdateTerrainLimit;
 	public UnityEvent<int> OnScoreUpdate;
-	
+
 	private void Start () {
 
 		for (int zPos = backViewDistance; zPos < initialGrassCount; zPos++) {
@@ -43,6 +43,7 @@ public class PlayManager : MonoBehaviour
 		}
 
 		OnUpdateTerrainLimit.Invoke(horizontalSize, travelDistance + backViewDistance);
+
 	}
 
 	private Terrain SpawnRandomTerrain (int zPos) {
