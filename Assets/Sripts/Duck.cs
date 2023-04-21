@@ -19,7 +19,7 @@ public class Duck : MonoBehaviour
 
     void Update()
     {
-		if (isMoveable)
+		if (isMoveable == false)
 			return;
 
 		if (DOTween.IsTweening(transform)) {
@@ -73,6 +73,10 @@ public class Duck : MonoBehaviour
 
 		transform.forward = direction;
 	}
+	
+	public void SetMovable (bool value) {
+		isMoveable = value;
+	}
 
 	public void UpdateMoveLimit (int horizontalSize, int backLimit) {
 		leftMoveLimit = -horizontalSize / 2;
@@ -87,11 +91,11 @@ public class Duck : MonoBehaviour
 	private void OnTriggerEnter (Collider other) {
 
 		if (other.CompareTag("Car")) {
-			if (isMoveable == true)
+			if (transform.localScale.y == 0.1f)
 				return;
 
-			transform.DOScaleY(0.1f, 0.2f);
-			isMoveable = true;
+			transform.DOScale(new Vector3(2,0.1f,2), 0.2f);
+			isMoveable = false;
 			Invoke("Die", 3);
 
 		} else if (other.CompareTag("Coin")) {
