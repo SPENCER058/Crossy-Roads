@@ -13,6 +13,7 @@ public class Duck : MonoBehaviour
 
 	public UnityEvent<Vector3> OnJumpEnd;
 	public UnityEvent<int> OnGetCoin;
+	public UnityEvent onCarCollision;
 	public UnityEvent OnDie;
 
 	private bool isMoveable = false;
@@ -96,6 +97,7 @@ public class Duck : MonoBehaviour
 
 			transform.DOScale(new Vector3(2,0.1f,2), 0.2f);
 			isMoveable = false;
+			onCarCollision.Invoke();
 			Invoke("Die", 3);
 
 		} else if (other.CompareTag("Coin")) {
