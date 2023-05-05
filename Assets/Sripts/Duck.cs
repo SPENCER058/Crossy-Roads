@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using TMPro;
 
 public class Duck : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Duck : MonoBehaviour
 	[SerializeField] int rightMoveLimit;
 	[SerializeField] int backMoveLimit;
 
+	[SerializeField] float playTime = 0f;
+	[SerializeField] TMP_Text playTimeText;
+
 	public UnityEvent<Vector3> OnJumpEnd;
 	public UnityEvent<int> OnGetCoin;
 	public UnityEvent onCarCollision;
@@ -20,8 +24,11 @@ public class Duck : MonoBehaviour
 
     void Update()
     {
-		if (isMoveable == false)
+		if (isMoveable == false) {
 			return;
+		} else {
+			playTime += Time.deltaTime;
+		}
 
 		if (DOTween.IsTweening(transform)) {
 			return;
@@ -115,7 +122,14 @@ public class Duck : MonoBehaviour
 
 	}
 
+	public void UpdatePlayTime () {
+		int minutes = Mathf.FloorToInt(playTime / 60f);
+		int seconds = Mathf.FloorToInt(playTime % 60f);
+		playTimeText.text = "Play Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+	}
+
 	private void Die () {
+		UpdatePlayTime();
 		OnDie.Invoke();
 	}
 }
