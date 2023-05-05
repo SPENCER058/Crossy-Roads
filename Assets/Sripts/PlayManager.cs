@@ -7,6 +7,7 @@ public class PlayManager : MonoBehaviour
 	[SerializeField] List<Terrain> terrainList;
 	[SerializeField] List<Coin> coinList;
 
+	[Header("Terrain Settings")]
 	[SerializeField] int initialGrassCount = 5;
 	[SerializeField] int horizontalSize;
 	[SerializeField] int backViewDistance = -4;
@@ -14,6 +15,7 @@ public class PlayManager : MonoBehaviour
 
 	Dictionary<int, Terrain> activeTerrainDict = new Dictionary<int, Terrain>(20);
 
+	[Header("Player Gains")]
 	[SerializeField] private int travelDistance;
 	[SerializeField] private int coin;
 
