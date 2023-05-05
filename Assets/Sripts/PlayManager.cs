@@ -48,6 +48,7 @@ public class PlayManager : MonoBehaviour
 
 	}
 
+
 	private Terrain SpawnRandomTerrain (int zPos) {
 
 		Terrain comparatorTerrain = null;
@@ -143,5 +144,9 @@ public class PlayManager : MonoBehaviour
 		SpawnRandomTerrain(spawnPosition);
 
 		OnUpdateTerrainLimit.Invoke(horizontalSize, travelDistance + backViewDistance);
+	}
+
+	private void OnDestroy () {
+		
 	}
 }

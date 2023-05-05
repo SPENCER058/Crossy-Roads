@@ -11,13 +11,18 @@ public class AudioMuteToggle : MonoBehaviour
 
 	private void Awake () {
 		mutePref = PlayerPrefs.GetInt("MUTE");
-		toggle.SetIsOnWithoutNotify(mutePref != 0);
 	}
 
 	private void Start () {
-		audioMixer.GetFloat(MasterVolumeParameter, out var master_db);
-		toggle.SetIsOnWithoutNotify(master_db == -80);
+		mutePref = PlayerPrefs.GetInt("MUTE");
+		float volumeValue = 0;
+		if (mutePref == 1) {
+			volumeValue = -80;
+		}
+		audioMixer.SetFloat(MasterVolumeParameter, volumeValue);
+		toggle.SetIsOnWithoutNotify(volumeValue == -80);
 	}
+
 
 	public void SetMute (bool toggleValue) {
 		int mute;
